@@ -224,16 +224,16 @@ const products = [
 
 const services = [
   {
-    title: "Automatic - AutoGuard",
-    description: "Next generation fire protection system",
-    image: "https://images.pexels.com/photos/3845162/pexels-photo-3845162.jpeg",
-    tags: ["Software", "Monitoring", "Hardware", "Mechanics", "Automatization"]
+    title: "Professional Bike Fitting",
+    description: "Expert bike fitting service using advanced technology to optimize your riding position for maximum comfort and performance. Our certified technicians ensure the perfect fit for your body type and riding style.",
+    image: "https://images.pexels.com/photos/3768730/pexels-photo-3768730.jpeg",
+    tags: ["Biomechanics", "Performance", "Comfort", "Professional", "Custom"]
   },
   {
-    title: "Huddle - Inventas",
-    description: "Critical settings flow for operations",
-    image: "https://images.pexels.com/photos/3194521/pexels-photo-3194521.jpeg",
-    tags: ["Designing", "Research", "Product Development"]
+    title: "Premium Maintenance",
+    description: "Complete bike maintenance and repair service by certified mechanics. From basic tune-ups to complex repairs, we use state-of-the-art tools and genuine parts to keep your bike in perfect condition.",
+    image: "https://images.pexels.com/photos/8989464/pexels-photo-8989464.jpeg",
+    tags: ["Repairs", "Maintenance", "Expert Service", "Quality Parts"]
   }
 ];
 
