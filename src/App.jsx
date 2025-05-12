@@ -87,17 +87,41 @@ function App() {
             <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
               Our Services
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className="p-8 bg-zinc-900 rounded-xl text-center transform hover:-translate-y-2 transition-all duration-300"
+                  className="relative group overflow-hidden rounded-2xl"
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
                 >
-                  <div className="text-red-500 text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                  <p className="text-gray-400">{service.description}</p>
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                    <div className="absolute bottom-0 left-0 p-8 w-full">
+                      <div className="flex items-center gap-4 mb-4">
+                        {service.tags.map((tag, tagIndex) => (
+                          <span 
+                            key={tagIndex}
+                            className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+                      <p className="text-gray-300 mb-4">{service.description}</p>
+                      <button className="text-white hover:text-red-500 transition-colors duration-300 flex items-center gap-2">
+                        Learn More
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -200,19 +224,16 @@ const products = [
 
 const services = [
   {
-    icon: <FaBicycle />,
-    title: "Bike Fitting",
-    description: "Professional fitting service for optimal comfort and performance"
+    title: "Automatic - AutoGuard",
+    description: "Next generation fire protection system",
+    image: "https://images.pexels.com/photos/3845162/pexels-photo-3845162.jpeg",
+    tags: ["Software", "Monitoring", "Hardware", "Mechanics", "Automatization"]
   },
   {
-    icon: <FaTools />,
-    title: "Maintenance",
-    description: "Expert maintenance and repair services"
-  },
-  {
-    icon: <FaUsers />,
-    title: "Community",
-    description: "Join our growing community of e-bike enthusiasts"
+    title: "Huddle - Inventas",
+    description: "Critical settings flow for operations",
+    image: "https://images.pexels.com/photos/3194521/pexels-photo-3194521.jpeg",
+    tags: ["Designing", "Research", "Product Development"]
   }
 ];
 
