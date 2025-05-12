@@ -1,37 +1,219 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { Element } from 'react-scroll';
+import { FaBicycle, FaTools, FaUsers, FaPhone } from 'react-icons/fa';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import CatalogPage from './pages/CatalogPage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import ContactPage from './pages/ContactPage';
-import NotFoundPage from './pages/NotFoundPage'; // Pagina per URL non validi
-
-// Importa qui il tuo file CSS principale se non usi Tailwind o altro
-// import './App.css';
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
-    <div className="App flex flex-col min-h-screen"> {/* Esempio con classi Tailwind */}
+    <div className="min-h-screen bg-black text-white">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8"> {/* Contenuto principale */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/catalogo" element={<CatalogPage />} />
-          {/* Nota il :productId per il parametro dinamico */}
-          <Route path="/prodotto/:productId" element={<ProductDetailPage />} />
-          <Route path="/chi-siamo" element={<AboutPage />} />
-          <Route path="/servizi" element={<ServicesPage />} />
-          <Route path="/contatti" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} /> {/* Rotta per 404 */}
-        </Routes>
-      </main>
+      
+      {/* Hero Section */}
+      <Element name="home">
+        <section className="relative h-screen flex items-center">
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.pexels.com/photos/2539400/pexels-photo-2539400.jpeg"
+              alt="Background"
+              className="w-full h-full object-cover opacity-50"
+            />
+          </div>
+          
+          <div className="container mx-auto px-4 z-10">
+            <div className="max-w-3xl" data-aos="fade-up">
+              <h1 className="text-7xl font-bold mb-6 leading-tight">
+                COOL
+                <span className="text-red-500"> E-BIKES</span>
+              </h1>
+              <p className="text-xl mb-8 text-gray-300">
+                Futuristic electric bikes with innovative energy technology.
+                Experience the perfect blend of style and performance.
+              </p>
+              <div className="flex gap-6">
+                <button className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105">
+                  Discover Now
+                </button>
+                <button className="border border-white hover:bg-white hover:text-black px-8 py-4 rounded-full transition-all duration-300">
+                  Contact Us
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </Element>
+
+      {/* Catalog Section */}
+      <Element name="catalogo">
+        <section className="py-20 bg-zinc-900">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
+              Our Collection
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {products.map((product, index) => (
+                <div
+                  key={index}
+                  className="bg-black rounded-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <img src={product.image} alt={product.name} className="w-full h-64 object-cover" />
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+                    <p className="text-gray-400 mb-4">{product.description}</p>
+                    <span className="text-red-500 font-bold text-xl">{product.price}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Element>
+
+      {/* Services Section */}
+      <Element name="servizi">
+        <section className="py-20 bg-black">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
+              Our Services
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  className="p-8 bg-zinc-900 rounded-xl text-center transform hover:-translate-y-2 transition-all duration-300"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div className="text-red-500 text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+                  <p className="text-gray-400">{service.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Element>
+
+      {/* About Section */}
+      <Element name="chi-siamo">
+        <section className="py-20 bg-zinc-900">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div data-aos="fade-right">
+                <img
+                  src="https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg"
+                  alt="About Us"
+                  className="rounded-xl shadow-lg"
+                />
+              </div>
+              <div data-aos="fade-left">
+                <h2 className="text-4xl font-bold mb-6">About Us</h2>
+                <p className="text-gray-400 mb-6">
+                  We are passionate about delivering the best electric bikes to our customers.
+                  With years of experience and dedication to quality, we ensure that every
+                  bike meets the highest standards of performance and design.
+                </p>
+                <button className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full transition-all duration-300">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </Element>
+
+      {/* Contact Section */}
+      <Element name="contatti">
+        <section className="py-20 bg-black">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
+              Contact Us
+            </h2>
+            <div className="max-w-2xl mx-auto">
+              <form className="space-y-6" data-aos="fade-up">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full bg-zinc-900 rounded-lg px-4 py-3 text-white"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="w-full bg-zinc-900 rounded-lg px-4 py-3 text-white"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    placeholder="Your Message"
+                    rows="5"
+                    className="w-full bg-zinc-900 rounded-lg px-4 py-3 text-white"
+                  ></textarea>
+                </div>
+                <button className="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full transition-all duration-300">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </Element>
+
       <Footer />
     </div>
   );
 }
+
+const products = [
+  {
+    name: "Urban Explorer E-Bike",
+    description: "Perfect for city commuting with style",
+    price: "€2,499",
+    image: "https://images.pexels.com/photos/1149601/pexels-photo-1149601.jpeg"
+  },
+  {
+    name: "Mountain Master E-Bike",
+    description: "Conquer any terrain with ease",
+    price: "€3,299",
+    image: "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg"
+  },
+  {
+    name: "Speed Demon E-Bike",
+    description: "For the thrill-seekers and racers",
+    price: "€4,199",
+    image: "https://images.pexels.com/photos/5465247/pexels-photo-5465247.jpeg"
+  }
+];
+
+const services = [
+  {
+    icon: <FaBicycle />,
+    title: "Bike Fitting",
+    description: "Professional fitting service for optimal comfort and performance"
+  },
+  {
+    icon: <FaTools />,
+    title: "Maintenance",
+    description: "Expert maintenance and repair services"
+  },
+  {
+    icon: <FaUsers />,
+    title: "Community",
+    description: "Join our growing community of e-bike enthusiasts"
+  }
+];
 
 export default App;
